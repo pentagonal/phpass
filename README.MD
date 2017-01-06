@@ -49,7 +49,7 @@ require_once(__DIR__ . "/vendor/autoload.php");
  * Initiate of PasswordHash
  * @type Object instance of \Pentagonal\PhPass\PasswordHash
  */
-$passwordHash = new \Pentagonal\Phpass\PasswordHash();
+$passwordHash = new \Pentagonal\PhPass\PasswordHash();
 
 /**
  * Hash the string of password
