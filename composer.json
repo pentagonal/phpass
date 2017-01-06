@@ -1,0 +1,22 @@
+{
+    "name": "pentagonal/phpass",
+    "type": "library",
+    "license" : "Public Domain",
+    "description": "PHP password hashing library original by open wall PhPass",
+    "keywords": ["BlowFish", "crypt", "password", "security", "hash"],
+    "homepage": "http://github.com/pentagonal/phpass/",
+    "authors": [
+        {
+            "name" : "Solar Designer",
+            "email": "solar@openwall.com",
+            "homepage": "http://openwall.com/phpass/"
+        }
+    ],
+    "version": "1.0",
+    "require": {
+        "php": ">=5.2"
+    },
+    "autoload": {
+        "psr-0": {"Pentagonal\\PhPass": "src/"}
+    }
+}
