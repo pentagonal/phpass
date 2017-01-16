@@ -402,7 +402,7 @@ class PasswordHash
     public static function isMaybeHash($string)
     {
         if (!is_string($string)
-            || ! in_array(($length = strlen($string)), [20, 34, 60])
+            || ! in_array(($length = strlen($string)), array(20, 34, 60))
             || preg_match('/[^a-zA-Z0-9\.\/\$\_]/', $string)
         ) {
             return false;
@@ -416,7 +416,7 @@ class PasswordHash
                 );
             case '34':
                 return !(substr_count($string, '$') <> 2
-                    || !in_array(substr($string, 0, 3), ['$P$', '$H$'])
+                    || !in_array(substr($string, 0, 3), array('$P$', '$H$'))
                 );
         }
 
