@@ -1,9 +1,9 @@
 Password Hash Library
 =====================
 
-[![Build Status](https://travis-ci.org/pentagonal/phpass.svg?branch=master)](https://travis-ci.org/pentagonal/phpass)
+[![Build Status](https://travis-ci.org/pentagonal/phpass.svg?branch=1.0.0)](https://travis-ci.org/pentagonal/phpass)
 
-Script base on OpenWall's [Phpass](http://openwall.com/phpass/), based on the 0.3 release, change to ready for:
+Script base on OpenWall's [PhPass](http://openwall.com/phpass/), based on the 0.3 release, change to ready for:
 
 - Name Space
 - Composer (Autoload)
