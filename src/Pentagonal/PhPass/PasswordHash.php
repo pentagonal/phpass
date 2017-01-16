@@ -1,5 +1,10 @@
 <?php
 /**
+ * PhPass PassWord Hashes Library
+ */
+namespace Pentagonal\PhPass;
+
+/**
  * Portable PHP password hashing framework.
  *
  * Version 0.3 / genuine.
@@ -25,23 +30,27 @@
  * requirements (there can be none), but merely suggestions.
  * -------------------------------------------------------------
  *
- * @version 1.0.0 Edited from Original Version <Version 0.3 - Genuine> of PhPass
+ * - version 1.0.0 Edited from Original Version <Version 0.3 - Genuine> of PhPass
  *          Complete OOP php5 structural
  *
- * @package Pentagonal\Phpass\PasswordHash
- */
-
-namespace Pentagonal\PhPass;
-
-/**
- * The original file consist take from <http://www.openwall.com/phpass/>
- *     that custom change eg: change of method name and class
- *     The license is follow of phpass license.
- *     We are not change the code hardly, make it work with change method
- *     add the bracket ({/}) and make the code neat and documented and PSR4 Compatible
+ * - version 1.1.0 add :
+ *          - method `static bool isMaybeHash(string)`
+ *          - add `VERSION` constant
+ *
+ * @version 1.1.0
+ * @package Pentagonal\PhPass\PasswordHash
+ * @subpackage Pentagonal\PhPass
+ * @author pentagonal <org@pentagonal.org>
+ *         solar - open wall <solar@openwall.com>
+ * @link http://www.openwall.com/phpass/
  */
 class PasswordHash
 {
+    /**
+     * Version
+     */
+    const VERSION = '1.1.0';
+
     /**
      * Base collection 64 string
      * @var string
@@ -382,5 +391,40 @@ class PasswordHash
     public function verify($plainPassword, $storedHash)
     {
         return $this->checkPassword($plainPassword, $storedHash);
+    }
+
+    /**
+     * Checking is string maybe hashed by PhPass
+     *
+     * @param string $string has to check
+     * @return bool
+     */
+    public static function isMaybeHash($string)
+    {
+        if (!is_string($string)
+            || ! in_array(($length = strlen($string)), [20, 34, 60])
+            || preg_match('/[^a-zA-Z0-9\.\/\$\_]/', $string)
+        ) {
+            return false;
+        }
+
+        switch ((string) $length) {
+            case '20':
+                return !($string[0] != '_'
+                    || strpos($string, '$') !== false
+                    || strpos($string, '.') === false
+                );
+            case '34':
+                return !(substr_count($string, '$') <> 2
+                    || !in_array(substr($string, 0, 3), ['$P$', '$H$'])
+                );
+        }
+
+        return !(
+            substr($string, 0, 4) != '$2a$'
+            || substr($string, 6, 1) != '$'
+            || ! is_numeric(substr($string, 4, 2))
+            || substr_count($string, '$') <> 3
+        );
     }
 }
