@@ -155,8 +155,9 @@ fabric.properties
 # =================================
 #
 
-# ignore composer phar file
+# ignore composer phar & lock file
 composer.phar
+composer.lock
 
 # add exclude vendor
 vendor
