@@ -127,4 +127,23 @@ class OnlyTest extends \PHPUnit_Framework_TestCase
         $this->assertStringStartsWith(self::HASH_PREFIX, $hash);
         $this->assertStringStartsWith(self::HASH_PORTABLE_PREFIX, $hashPortable);
     }
+
+    public function testStringVersion()
+    {
+        $this->assertContains('.', PasswordHash::VERSION);
+    }
+
+    public function testIsHashedOrNot()
+    {
+        $passwordHash  = new PasswordHash(8, false);
+        $portablePasswordHash  = new PasswordHash(8, true);
+
+        $hash = $passwordHash->HashPassword(self::STORED_PLAIN_VALID);
+        $hashPortable = $portablePasswordHash->HashPassword(self::STORED_PLAIN_VALID);
+
+        $this->assertTrue(PasswordHash::isMaybeHash($hash));
+        $this->assertTrue(PasswordHash::isMaybeHash($hashPortable));
+        // not hashed
+        $this->assertFalse(PasswordHash::isMaybeHash('invalidHashed'));
+    }
 }
